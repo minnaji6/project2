@@ -1,26 +1,40 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import styled from "styled-components"
 
 const linkStyles = {
     display: "inline",
     width: "100%",
     padding: "12px",
     margin: "0 6px 6px",
-    background: "blue",
+    background: "black",
+    border: "salmon 6px solid",
     textDecoration: "none",
-    color: "white",
+    color: "salmon",
 }
 
 const active = {
     background: "salmon",
-    color: "black",
-    "font-weight": "bold"
-
+    color: "white",
+    fontWeight: "bold",
+    border: "white 6px solid"
 }
 
-function NavBar() {
+const NavStyle = styled.div`
+    padding: 10px;
+    text-align: center;
+    font-size: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 30px;
+    justify-content: space-around;
+`
+
+
+const NavBar = ({isLoggedIn}) => {
     return (
-        <div>
+        <NavStyle className='nav-style'>
             <NavLink
                 to="/"
                 exact
@@ -30,12 +44,12 @@ function NavBar() {
                 Home
             </NavLink>
             <NavLink
-                to="/findGame"
+                to="/playInAGame"
                 exact
                 style={linkStyles}
                 activeStyle={active}
             >
-                Find a Game
+                Play in a Game!
             </NavLink>
             <NavLink
                 to="/findPlayer"
@@ -46,15 +60,22 @@ function NavBar() {
                 Find a Player
             </NavLink>
             <NavLink
+                to="/editProfile"
+                exact
+                style={linkStyles}
+                activeStyle={active}
+            >
+                Edit Profile
+            </NavLink>
+            <NavLink
                 to="/login"
                 exact
                 style={linkStyles}
                 activeStyle={active}
             >
-                Login
+                {isLoggedIn ? "Logout" : "Login"}
             </NavLink>
-
-        </div>
+        </NavStyle>
     )
 }
 
